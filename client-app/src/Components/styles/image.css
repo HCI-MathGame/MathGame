@@ -1,0 +1,7 @@
+.image-background {
+    width: 100%; /* Poate să ocupe întreaga lățime a ecranului, ajustați după nevoie */
+    height: 100vh; /* Poate să ocupe întreaga înălțime a ecranului, ajustați după nevoie */
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #ccc;
+}

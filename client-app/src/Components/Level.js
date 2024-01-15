@@ -1,15 +1,117 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import textBubble from '../img/text-bubble.png'
+import image1 from '../img/1.png'
+import image2 from '../img/2.png'
+import image3 from '../img/3.png'
+import image4 from '../img/4.png'
+import image5 from '../img/5.png'
+import image6 from '../img/6.png'
+import image7 from '../img/7.png'
+import image8 from '../img/8.png'
+import image9 from '../img/9.png'
+import image10 from '../img/10.png'
+import image11 from '../img/11.png'
+import image12 from '../img/12.png'
+import image13 from '../img/13.png'
+import image14 from '../img/14.png'
+import './styles/image.css'
+
+
+const imagesList = [
+    {
+        id: 1,
+        src: image1,
+        alt: "Image 1",
+    },
+    {
+        id: 2,
+        src: image2,
+        alt: "Image 2",
+    },
+    {
+        id: 3,
+        src: image3,
+        alt: "Image 3",
+    },
+    {
+        id: 4,
+        src: image4,
+        alt: "Image 4",
+    },
+    {
+        id: 5,
+        src: image5,
+        alt: "Image 5",
+    },
+    {
+        id: 6,
+        src: image6,
+        alt: "Image 6",
+    },
+    {
+        id: 7,
+        src: image7,
+        alt: "Image 7",
+    },
+    {
+        id: 8,
+        src: image8,
+        alt: "Image 8",
+    },
+    {
+        id: 9,
+        src: image9,
+        alt: "Image 9",
+    },
+    {
+        id: 10,
+        src: image10,
+        alt: "Image 10",
+    },
+    {
+        id: 11,
+        src: image11,
+        alt: "Image 11",
+    },
+    {
+        id: 12,
+        src: image12,
+        alt: "Image 12",
+    },
+    {
+        id: 13,
+        src: image13,
+        alt: "Image 13",
+    },
+    {
+        id: 14,
+        src: image14,
+        alt: "Image 14",
+    },
+];
+
+function schimbaImagineDeFundal() {
+   // const container = document.getElementById('background-container');
+    const randomIndex = Math.floor(Math.random() * imagesList.length);
+    const randomImage = imagesList[randomIndex];
+    document.getElementById('randomImage').src = randomImage;
+  
+    //container.style.backgroundImage = url('${randomImage}');
+  }
 
 function Level() {
     const { level } = useParams();
     const levelNumber = parseInt(level);
+
+    const [randomImage, setRandomImage] = useState('');
 
     const [isReady, setIsReady] = useState(false);
     const [score, setScore] = useState(0);
     const [operations, setOperations] = useState([]);
     const [currentOperation, setCurrentOperation] = useState([]);
     const [activeIndex, setActiveIndex] = useState(null); // State to track the active element
+
 
 
     const handleDivClick = (index) => {
@@ -34,6 +136,11 @@ function Level() {
         transition: 'transform 0.1s' // Smooth transition for the press effect
     };
 
+    // const selectRandomImage = () => {
+    //     const imageNumber = Math.floor(Math.random() * 14) + 1; // 1 to 14
+    //     setRandomImage('../img/1.png'); // Assuming your images are named as '1.png', '2.png', ..., '14.png' and stored in the 'img' folder
+    // };
+
     const activeStyle = {
         ...defaultStyle,
         backgroundColor: '#C7D2FE', // Change background color to indicate active state
@@ -47,6 +154,7 @@ function Level() {
                 .then(module => {
                     setOperations(module.default);
                     const randomOperation = getRandomOperation(module.default);
+                    schimbaImagineDeFundal();
                     setCurrentOperation(randomOperation);
                 })
                 .catch(err => {
@@ -112,6 +220,15 @@ function Level() {
                                     </div>
                                 ))}
                             </div>
+                        
+                                {/* <img src={randomImage} alt="Random Disney Character" style={{ position: 'absolute', bottom: '20px', right: '20px' }} />
+                                <img src="../img/text-bubble.png" alt="Text Bubble" style={{ position: 'absolute', bottom: '100px', right: '50px' }} /> */}
+                            <div className='image-background'>
+                                {imagesList.map((image) => (
+                                    <img key={image.id} src={image.src} alt={image.alt} />
+                                ))}
+                            </div>
+                            
                             <div style={{
                                 display: 'flex',
                                 justifyContent: 'center',
