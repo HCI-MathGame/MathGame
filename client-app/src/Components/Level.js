@@ -95,7 +95,8 @@ function schimbaImagineDeFundal() {
    // const container = document.getElementById('background-container');
     const randomIndex = Math.floor(Math.random() * imagesList.length);
     const randomImage = imagesList[randomIndex];
-    document.getElementById('randomImage').src = randomImage;
+    console.log(randomImage)
+    document.getElementById('randomImage').src = randomImage.src;
   
     //container.style.backgroundImage = url('${randomImage}');
   }
@@ -178,7 +179,7 @@ function Level() {
         const operation = ops[Math.floor(Math.random() * ops.length)];
         // Split the operation into parts and filter out the division symbol
         var test = operation.split('/');
-        debugger;
+        // debugger;
         return test;
     };
 
@@ -223,9 +224,9 @@ function Level() {
                         
                                 {/* <img src={randomImage} alt="Random Disney Character" style={{ position: 'absolute', bottom: '20px', right: '20px' }} />
                                 <img src="../img/text-bubble.png" alt="Text Bubble" style={{ position: 'absolute', bottom: '100px', right: '50px' }} /> */}
-                            <div className='image-background'>
+                            <div>
                                 {imagesList.map((image) => (
-                                    <img key={image.id} src={image.src} alt={image.alt} />
+                                    <img id='randomImage' key={image.id} src={image.src} alt={image.alt} className='image-background' />
                                 ))}
                             </div>
                             
