@@ -18,6 +18,22 @@ import image14 from '../img/14.png'
 import './styles/image.css'
 
 
+const funFactsList = [
+    "   STIAI CA: \n 2 + 2 = 4,dar și 1 + 3 = 4. \n Exista multe modalitati\n diferite\n de a ajunge la\n aceeași suma",
+    "   STIAI CA: \n Numerele pare sunt\n cele care \n se termina in 0, 2, 4, 6 sau 8.",
+    "   STIAI CA: \n Numerele impare sunt\n cele care \n se termina in 1, 3, 5, 7 sau 9.",
+    "   STIAI CA: \n Ceasul are douăsprezece ore, iar \n fiecare ora este ca o \n perioadă de joacă. \n Ora 12 este ca pranzul!",
+    "   STIAI CA: \n Calendarul are 12 luni în total,\n iar fiecare \n lună are diferite\n numere de zile",
+    "   STIAI CA: \n Dacă arunci un zar, poți obține\n unul dintre cele 6 numere:\n 1, 2, 3, 4, 5 sau 6.",
+    "   STIAI CA: \n Un triunghi are trei laturi\n și trei unghiuri.",
+    "   STIAI CA: \n Dacă imparti 6 în două părți\n egale, vei obține 3 și 3. 3 + 3 = 6.",
+    "   STIAI CA: \n Un litru de apă cântărește\n aproximativ un kilogram.",
+    "   STIAI CA: \n O zi are 24 de ore, \n iar fiecare oră are \n 60 de minute.",
+    "   STIAI CA: \n Un cerc este o formă \n geometrică care nu are\n niciun colț sau margini.",
+    "   STIAI CA: \n Dacă aduni toate cifrele \n de la 1 la 9 (1 + 2 + 3 + ... + 9),\n vei obține suma 45.",
+    "   STIAI CA: \n Numerele pot fi adăugate \n și scăzute în multe moduri diferite,\n iar matematica este plină de\n provocări interesante.",
+]
+
 const imagesList = [
     {
         id: 1,
@@ -91,15 +107,40 @@ const imagesList = [
     },
 ];
 
-function schimbaImagineDeFundal() {
-   // const container = document.getElementById('background-container');
+function getRandomFunFact(funFactsList) {
+    const randomIndex = Math.floor(Math.random() * funFactsList.length);
+    const textWithLineBreaks = funFactsList[randomIndex].split('\n').map((line, index) => (
+    <React.Fragment key={index}>
+        {line}
+        <br />
+    </React.Fragment>
+));
+return <div>{textWithLineBreaks}</div>;
+}
+
+function getRandomImageElement(imagesList) {
+    // Get a random index based on the length of the imagesList array
     const randomIndex = Math.floor(Math.random() * imagesList.length);
+    // Select the image at the random index
     const randomImage = imagesList[randomIndex];
-    console.log(randomImage)
-    document.getElementById('randomImage').src = randomImage.src;
-  
-    //container.style.backgroundImage = url('${randomImage}');
-  }
+    // Return an image element for the randomly selected image
+    return (
+        <img
+            key={randomImage.id}
+            src={randomImage.src}
+            alt={randomImage.alt}
+            className='character-image'
+        />
+    );
+}
+
+
+
+function getRandomNumber() {
+    // Generate a random number between 1 and 14
+    return Math.floor(Math.random() * 14) + 1;
+}
+
 
 function Level() {
     const { level } = useParams();
@@ -155,7 +196,6 @@ function Level() {
                 .then(module => {
                     setOperations(module.default);
                     const randomOperation = getRandomOperation(module.default);
-                    schimbaImagineDeFundal();
                     setCurrentOperation(randomOperation);
                 })
                 .catch(err => {
@@ -201,12 +241,12 @@ function Level() {
     }
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#ffd9b3'}}>
             {isReady ? (
                 <>
                     <div>
                         <h2>Level {levelNumber}</h2>
-                        <div style={{ right: '25px', top: '10px', position: 'absolute' }}>
+                        <div style={{ fontSize:25, fontFamily: 'Lucida Handwriting', right: '85px', top: '10px', position: 'absolute'}}>
                             <h2>Score: {score}</h2>
                         </div>
                         <div>
@@ -221,13 +261,12 @@ function Level() {
                                     </div>
                                 ))}
                             </div>
-                        
-                                {/* <img src={randomImage} alt="Random Disney Character" style={{ position: 'absolute', bottom: '20px', right: '20px' }} />
-                                <img src="../img/text-bubble.png" alt="Text Bubble" style={{ position: 'absolute', bottom: '100px', right: '50px' }} /> */}
                             <div>
-                                {imagesList.map((image) => (
-                                    <img id='randomImage' key={image.id} src={image.src} alt={image.alt} className='image-background' />
-                                ))}
+                            {getRandomImageElement(imagesList)}
+                            {<img src={textBubble} alt="Text Bubble" className="text-bubble" /> }
+                            <div style={{ fontSize: 18, fontFamily: 'Lucida Handwriting',position: 'absolute', bottom: '20px', right: '320px', width: '500px', height: '800px'}}>
+                            {getRandomFunFact(funFactsList)}
+                                </div>
                             </div>
                             
                             <div style={{
@@ -292,10 +331,41 @@ function Level() {
                     </div>
                 </>
             ) : (
-                <div>
+                <div style={{fontFamily : 'Lucida Handwriting', fontSize : 30, textAlign:'center'}}>
                     <h2>Are you ready?</h2>
-                    <button onClick={handleReadyClick}>Yes</button>
-                    <Link to="/">No</Link>
+                    <button onClick={handleReadyClick}
+                            style={{
+
+                                    backgroundColor: '#F44336', // Red color
+                                    border: 'none',
+                                    fontFamily : 'Lucida Handwriting',
+                                    color: 'white',
+                                    padding: '15px 32px',
+                                    textAlign: 'center',
+                                    textDecoration: 'none',
+                                    display: 'inline-block',
+                                    fontSize: '16px',
+                                    borderRadius: '10px',
+                                    boxShadow: '4px 4px 0px #D32F2F', // Shadow for the 3D effect
+                                    cursor: 'pointer',
+                    }}>
+                        Yes
+                    </button>
+                    <Link to="/"
+                    style={{
+                                    backgroundColor: '#F44336', // Red color
+                                    border: 'none',
+                                    color: 'white',
+                                    padding: '15px 32px',
+                                    textAlign: 'center',
+                                    textDecoration: 'none',
+                                    display: 'inline-block',
+                                    fontSize: '16px',
+                                    borderRadius: '10px',
+                                    boxShadow: '4px 4px 0px #D32F2F', // Shadow for the 3D effect
+                                    cursor: 'pointer',
+                    }}>No
+                    </Link>
                 </div>
             )}
         </div>
