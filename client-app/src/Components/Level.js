@@ -309,7 +309,7 @@ function Level() {
                                     boxShadow: '4px 4px 0px #2E7D32', // Shadow for the 3D effect
                                     cursor: 'pointer',
                                 }}>
-                                Verifica
+                                Verifică
                             </button>
                             <button
                                 onClick={cancelAnswer}
@@ -326,7 +326,7 @@ function Level() {
                                     boxShadow: '4px 4px 0px #D32F2F', // Shadow for the 3D effect
                                     cursor: 'pointer',
                                 }}>
-                                Anuleaza raspunsul
+                                Anulează răspunsul
                             </button>
                         </div>
                     </div>
@@ -335,13 +335,13 @@ function Level() {
                 <div style={{fontSize : 50, textAlign:'center',color: '#F44336', 
                 textShadow: '2px 2px 0px #D32F2F',
                 position: 'absolute'}}>
-                    <h2>Are you ready?</h2>
+                    <h2>Ești pregătit pentru aventură?</h2>
                     <button onClick={handleReadyClick}
                             style={{
 
                                     backgroundColor: '#F44336', // Red color
                                     border: 'none',
-                                    fontFamily : 'Lucida Handwriting',
+                                    //fontFamily : 'Lucida Handwriting',
                                     color: 'white',
                                     padding: '15px 32px',
                                     textAlign: 'center',
@@ -352,7 +352,7 @@ function Level() {
                                     boxShadow: '4px 4px 0px #D32F2F', // Shadow for the 3D effect
                                     cursor: 'pointer',
                     }}>
-                        Yes
+                        DA
                     </button>
                     <Link to="/"
                     style={{
@@ -367,7 +367,7 @@ function Level() {
                                     borderRadius: '10px',
                                     boxShadow: '4px 4px 0px #D32F2F', // Shadow for the 3D effect
                                     cursor: 'pointer',
-                    }}>No
+                    }}>NU
                     </Link>
                 </div>
             )}
