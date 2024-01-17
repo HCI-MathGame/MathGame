@@ -15,6 +15,7 @@ import image11 from '../img/11.png'
 import image12 from '../img/12.png'
 import image13 from '../img/13.png'
 import image14 from '../img/14.png'
+import image from '../img/image.jpg';
 import './styles/image.css'
 
 
@@ -241,12 +242,12 @@ function Level() {
     }
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#ffd9b3'}}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundImage: `url(${image})`,backgroundSize: 'cover', backgroundPosition: 'center'}}>
             {isReady ? (
                 <>
                     <div>
                         <h2>Level {levelNumber}</h2>
-                        <div style={{ fontSize:25, fontFamily: 'Lucida Handwriting', right: '85px', top: '10px', position: 'absolute'}}>
+                        <div style={{ fontSize:25, fontFamily: 'Lucida Handwriting', right: '85px', top: '10px', position: 'absolute',color: 'white',backgroundColor: 'rgba(0, 0, 0, 0.7)',padding: '1px',borderRadius: '20px',top: '5px'}}>
                             <h2>Score: {score}</h2>
                         </div>
                         <div>
@@ -264,7 +265,7 @@ function Level() {
                             <div>
                             {getRandomImageElement(imagesList)}
                             {<img src={textBubble} alt="Text Bubble" className="text-bubble" /> }
-                            <div style={{ fontSize: 18, fontFamily: 'Lucida Handwriting',position: 'absolute', bottom: '20px', right: '320px', width: '500px', height: '800px'}}>
+                            <div style={{ fontSize: 18, fontFamily: 'Lucida Handwriting',position: 'absolute', bottom: '550px',right: '190px' ,width: '400px' ,height: 'auto'}}>
                             {getRandomFunFact(funFactsList)}
                                 </div>
                             </div>
@@ -331,7 +332,9 @@ function Level() {
                     </div>
                 </>
             ) : (
-                <div style={{fontFamily : 'Lucida Handwriting', fontSize : 30, textAlign:'center'}}>
+                <div style={{fontSize : 50, textAlign:'center',color: '#F44336', 
+                textShadow: '2px 2px 0px #D32F2F',
+                position: 'absolute'}}>
                     <h2>Are you ready?</h2>
                     <button onClick={handleReadyClick}
                             style={{

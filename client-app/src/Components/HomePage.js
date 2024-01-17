@@ -1,11 +1,57 @@
 import React from "react";
+import './styles/image.css';
+import logo from '../img/fundal.png';
+import image from '../img/image.jpg';
 
 const HomePage = () => {
+    const startGame = () => {
+        // Aici poți adăuga logica pentru a începe jocul
+        // alert("Jocul a început! Have fun!");
+    };
+
     return (
         <>
-            <h1>home page</h1>
+            <div style={{ backgroundImage: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <h1 style = {{fontSize: '3em', 
+                    color: '#F44336', // Red color
+                    textShadow: '2px 2px 0px #D32F2F',
+                    position: 'absolute', // Adaugat pentru a face h1 suprapus peste logo
+                    top: '5%', // Ajustează pentru a centra h1 pe verticală
+                    transform: 'translateY(-50%)',
+                    }}
+                    >Bine ați venit la jocul interactiv, Mathle Quest!</h1>
+                <h2 style = {{fontSize: '3em', 
+                    color: '#F44336', // Red color
+                    textShadow: '2px 2px 0px #D32F2F',
+                    position: 'absolute', // Adaugat pentru a face h2 suprapus peste logo
+                    top: '12%', // Ajustează pentru a poziționa h2 sub h1
+                    transform: 'translateY(-50%)',
+                    }}
+                    > Să înceapă aventura!
+
+                </h2>
+                
+                <img src={logo} alt="Logo" style={{ width: '500px', marginBottom: '20px' }}/>
+    
+                {/* <h1>Bine ati venit la jocul interactiv, Mathle Quest!</h1> */}
+                <button onClick={startGame}
+                style={{
+                    backgroundColor: '#F44336', // Red color
+                    border: 'none',
+                    color: 'white',
+                    padding: '15px 32px',
+                    textAlign: 'center',
+                    textDecoration: 'none',
+                    display: 'inline-block',
+                    fontSize: '16px',
+                    borderRadius: '10px',
+                    boxShadow: '4px 4px 0px #D32F2F', // Shadow for the 3D effect
+                    cursor: 'pointer',
+    }}>Începeți jocul!</button>
+            </div>
         </>
-    )
-}
+    );
+};
 
 export default HomePage;
+

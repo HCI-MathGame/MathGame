@@ -10,16 +10,18 @@
     position: absolute;
     bottom: -8px;
     right: 20px;
-    width: 500px; /* Adjust as necessary */
+    /* width: 500px; Adjust as necessary */
+    width: 100%; /* Imaginea va ocupa 100% din lățimea containerului */
+    max-width: 370px;
     height: auto;
     
 }
   
 .text-bubble {
     position: absolute;
-    bottom: 470px; /* Increase the value to move it up */
-    right: 450px; /* Decrease the value to move it left */
-    width: 450px; /* Adjust as necessary */
+    bottom: 330px; /* Increase the value to move it up */
+    right: 280px; /* Decrease the value to move it left */
+    width: 400px; /* Adjust as necessary */
     height: auto;
     transform: scaleX(-1); /* This will flip the image vertically */
 }
