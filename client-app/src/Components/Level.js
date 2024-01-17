@@ -136,8 +136,6 @@ function getRandomImageElement(imagesList) {
     );
 }
 
-
-
 function getRandomNumber() {
     // Generate a random number between 1 and 14
     return Math.floor(Math.random() * 14) + 1;
@@ -168,7 +166,7 @@ function Level() {
         backgroundColor: '#EDE9FE',
         margin: '10px',
         padding: '20px',
-        fontSize: '1.5rem',
+        fontSize: '2rem',
         fontWeight: 'bold',
         color: '#5B21B6',
         boxShadow: '5px 5px 0px #A78BFA',
@@ -195,8 +193,10 @@ function Level() {
     useEffect(() => {
         if (score > 9 && levelNumber <= 3) {
             setScore(0);
-
             navigate(`/next-level/${levelNumber}`);
+        }
+        else if (levelNumber === 4 && score === 10) {
+            navigate('/final')
         }
     }, [score, levelNumber, navigate]);
 
@@ -324,10 +324,11 @@ function Level() {
                                     textAlign: 'center',
                                     textDecoration: 'none',
                                     display: 'inline-block',
-                                    fontSize: '16px',
+                                    fontSize: '24px',
                                     borderRadius: '10px',
                                     boxShadow: '4px 4px 0px #2E7D32', // Shadow for the 3D effect
                                     cursor: 'pointer',
+                                    marginRight: '20px'
                                 }}>
                                 Verifică
                             </button>
@@ -341,7 +342,7 @@ function Level() {
                                     textAlign: 'center',
                                     textDecoration: 'none',
                                     display: 'inline-block',
-                                    fontSize: '16px',
+                                    fontSize: '24px',
                                     borderRadius: '10px',
                                     boxShadow: '4px 4px 0px #D32F2F', // Shadow for the 3D effect
                                     cursor: 'pointer',
@@ -361,7 +362,7 @@ function Level() {
                     <button onClick={handleReadyClick}
                         style={{
 
-                            backgroundColor: '#F44336', // Red color
+                            backgroundColor: '#4CAF50', // Red color
                             border: 'none',
                             //fontFamily : 'Lucida Handwriting',
                             color: 'white',
@@ -369,27 +370,29 @@ function Level() {
                             textAlign: 'center',
                             textDecoration: 'none',
                             display: 'inline-block',
-                            fontSize: '16px',
+                            fontSize: '24px',
+                            marginRight: '20px',
                             borderRadius: '10px',
-                            boxShadow: '4px 4px 0px #D32F2F', // Shadow for the 3D effect
+                            boxShadow: '4px 4px 0px #2E7D32', // Shadow for the 3D effect
                             cursor: 'pointer',
                         }}>
                         DA
                     </button>
-                    <Link to="/"
-                        style={{
-                            backgroundColor: '#F44336', // Red color
-                            border: 'none',
-                            color: 'white',
-                            padding: '15px 32px',
-                            textAlign: 'center',
-                            textDecoration: 'none',
-                            display: 'inline-block',
-                            fontSize: '16px',
-                            borderRadius: '10px',
-                            boxShadow: '4px 4px 0px #D32F2F', // Shadow for the 3D effect
-                            cursor: 'pointer',
-                        }}>NU
+                    <Link to="/">
+                        <button
+                            style={{
+                                backgroundColor: '#F44336', // Red color
+                                border: 'none',
+                                color: 'white',
+                                padding: '15px 32px',
+                                textAlign: 'center',
+                                textDecoration: 'none',
+                                display: 'inline-block',
+                                fontSize: '24px',
+                                borderRadius: '10px',
+                                boxShadow: '4px 4px 0px #D32F2F', // Shadow for the 3D effect
+                                cursor: 'pointer',
+                            }}>NU</button>
                     </Link>
                 </div>
             )}
