@@ -16,7 +16,8 @@ import image12 from '../img/12.png'
 import image13 from '../img/13.png'
 import image14 from '../img/14.png'
 import image from '../img/image.jpg';
-import './styles/image.css'
+import './styles/image.css';
+import { useNavigate } from 'react-router-dom';
 
 
 const funFactsList = [
@@ -111,12 +112,12 @@ const imagesList = [
 function getRandomFunFact(funFactsList) {
     const randomIndex = Math.floor(Math.random() * funFactsList.length);
     const textWithLineBreaks = funFactsList[randomIndex].split('\n').map((line, index) => (
-    <React.Fragment key={index}>
-        {line}
-        <br />
-    </React.Fragment>
-));
-return <div>{textWithLineBreaks}</div>;
+        <React.Fragment key={index}>
+            {line}
+            <br />
+        </React.Fragment>
+    ));
+    return <div>{textWithLineBreaks}</div>;
 }
 
 function getRandomImageElement(imagesList) {
@@ -154,8 +155,7 @@ function Level() {
     const [operations, setOperations] = useState([]);
     const [currentOperation, setCurrentOperation] = useState([]);
     const [activeIndex, setActiveIndex] = useState(null); // State to track the active element
-
-
+    const [randomContent, setRandomContent] = useState(null);
 
     const handleDivClick = (index) => {
         setActiveIndex(index); // Set the active element
@@ -190,6 +190,15 @@ function Level() {
         boxShadow: 'inset 5px 5px 10px #A78BFA', // Inner shadow to look pressed
         transform: 'scale(0.95)' // Slightly scale down to give a pressed look
     };
+
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (score > 9 && levelNumber <= 3) {
+            setScore(0);
+
+            navigate(`/next-level/${levelNumber}`);
+        }
+    }, [score, levelNumber, navigate]);
 
     useEffect(() => {
         if (isReady) {
@@ -227,6 +236,10 @@ function Level() {
     const checkTheAnswer = () => {
         var win = currentOperation[5 + activeIndex] === currentOperation[8];
         if (win) {
+            setRandomContent({
+                imageElement: getRandomImageElement(imagesList),
+                funFact: getRandomFunFact(funFactsList)
+            });
             if (score > 9) {
                 window.alert("Felicitari");
             }
@@ -235,6 +248,12 @@ function Level() {
             const randomOperation = getRandomOperation(operations);
             setCurrentOperation(randomOperation);
         }
+        else {
+            setRandomContent({
+                imageElement: getRandomImageElement(imagesList),
+                funFact: "Mai incearca o data!"
+            });
+        }
     }
 
     const cancelAnswer = () => {
@@ -242,12 +261,12 @@ function Level() {
     }
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundImage: `url(${image})`,backgroundSize: 'cover', backgroundPosition: 'center'}}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundImage: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
             {isReady ? (
                 <>
                     <div>
-                        <h2>Level {levelNumber}</h2>
-                        <div style={{ fontSize:25, fontFamily: 'Lucida Handwriting', right: '85px', top: '10px', position: 'absolute',color: 'white',backgroundColor: 'rgba(0, 0, 0, 0.7)',padding: '1px',borderRadius: '20px',top: '5px'}}>
+                        <h1>Level {levelNumber}</h1>
+                        <div style={{ fontSize: 25, fontFamily: 'Lucida Handwriting', right: '85px', top: '10px', position: 'absolute', color: 'white', backgroundColor: 'rgba(0, 0, 0, 0.7)', padding: '1px', borderRadius: '20px', top: '5px' }}>
                             <h2>Score: {score}</h2>
                         </div>
                         <div>
@@ -262,14 +281,15 @@ function Level() {
                                     </div>
                                 ))}
                             </div>
-                            <div>
-                            {getRandomImageElement(imagesList)}
-                            {<img src={textBubble} alt="Text Bubble" className="text-bubble" /> }
-                            <div style={{ fontSize: 18, fontFamily: 'Lucida Handwriting',position: 'absolute', bottom: '550px',right: '190px' ,width: '400px' ,height: 'auto'}}>
-                            {getRandomFunFact(funFactsList)}
+                            {randomContent && (
+                                <div>
+                                    {randomContent.imageElement}
+                                    <img src={textBubble} alt="Text Bubble" className="text-bubble" />
+                                    <div style={{ fontSize: 15, fontFamily: 'Lucida Handwriting', position: 'absolute', bottom: '550px', right: '190px', width: '400px', height: 'auto' }}>
+                                        {randomContent.funFact}
+                                    </div>
                                 </div>
-                            </div>
-                            
+                            )}
                             <div style={{
                                 display: 'flex',
                                 justifyContent: 'center',
@@ -332,42 +352,44 @@ function Level() {
                     </div>
                 </>
             ) : (
-                <div style={{fontSize : 50, textAlign:'center',color: '#F44336', 
-                textShadow: '2px 2px 0px #D32F2F',
-                position: 'absolute'}}>
+                <div style={{
+                    fontSize: 50, textAlign: 'center', color: '#F44336',
+                    textShadow: '2px 2px 0px #D32F2F',
+                    position: 'absolute'
+                }}>
                     <h2>Ești pregătit pentru aventură?</h2>
                     <button onClick={handleReadyClick}
-                            style={{
+                        style={{
 
-                                    backgroundColor: '#F44336', // Red color
-                                    border: 'none',
-                                    //fontFamily : 'Lucida Handwriting',
-                                    color: 'white',
-                                    padding: '15px 32px',
-                                    textAlign: 'center',
-                                    textDecoration: 'none',
-                                    display: 'inline-block',
-                                    fontSize: '16px',
-                                    borderRadius: '10px',
-                                    boxShadow: '4px 4px 0px #D32F2F', // Shadow for the 3D effect
-                                    cursor: 'pointer',
-                    }}>
+                            backgroundColor: '#F44336', // Red color
+                            border: 'none',
+                            //fontFamily : 'Lucida Handwriting',
+                            color: 'white',
+                            padding: '15px 32px',
+                            textAlign: 'center',
+                            textDecoration: 'none',
+                            display: 'inline-block',
+                            fontSize: '16px',
+                            borderRadius: '10px',
+                            boxShadow: '4px 4px 0px #D32F2F', // Shadow for the 3D effect
+                            cursor: 'pointer',
+                        }}>
                         DA
                     </button>
                     <Link to="/"
-                    style={{
-                                    backgroundColor: '#F44336', // Red color
-                                    border: 'none',
-                                    color: 'white',
-                                    padding: '15px 32px',
-                                    textAlign: 'center',
-                                    textDecoration: 'none',
-                                    display: 'inline-block',
-                                    fontSize: '16px',
-                                    borderRadius: '10px',
-                                    boxShadow: '4px 4px 0px #D32F2F', // Shadow for the 3D effect
-                                    cursor: 'pointer',
-                    }}>NU
+                        style={{
+                            backgroundColor: '#F44336', // Red color
+                            border: 'none',
+                            color: 'white',
+                            padding: '15px 32px',
+                            textAlign: 'center',
+                            textDecoration: 'none',
+                            display: 'inline-block',
+                            fontSize: '16px',
+                            borderRadius: '10px',
+                            boxShadow: '4px 4px 0px #D32F2F', // Shadow for the 3D effect
+                            cursor: 'pointer',
+                        }}>NU
                     </Link>
                 </div>
             )}
