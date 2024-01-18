@@ -1,6 +1,7 @@
 {
   "name": "client-app",
   "version": "0.1.0",
+  "homepage": "https://hci-mathgame.github.io/MathGame/#",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
@@ -44,6 +45,5 @@
   },
   "devDependencies": {
     "gh-pages": "^6.1.1"
-  },
-  "homepage": "https://hci-mathgame.github.io/MathGame"
+  }
 }
