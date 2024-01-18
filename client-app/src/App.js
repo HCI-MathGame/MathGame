@@ -45,7 +45,7 @@ function App() {
           <Route path="/final" element={<CongratulationsPage />} />
         </Routes>
       </Router>
-      <audio ref={audioRef} src="%PUBLIC_URL%/music.mp3" loop />
+      <audio ref={audioRef} src="/music.mp3" loop />
     </div>
   );
 }
