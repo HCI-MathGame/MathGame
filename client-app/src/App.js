@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div>
-      <Router>
+      <Router basename='/'>
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path="/Level/:level" element={<Level />} />
