@@ -32,6 +32,9 @@ function App() {
       const audio = audioRef.current;
       audio.volume = 0.3;
       audio.play();
+      if (audio) {
+        audio.play().catch((e) => console.error("Error playing audio:", e));
+      }
     }
   }, [userInteracted]);
 
