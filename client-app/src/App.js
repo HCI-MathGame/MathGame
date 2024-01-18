@@ -5,8 +5,6 @@ import HomePage from './Components/HomePage';
 import Level from './Components/Level';
 import NextLevelPage from './Components/NextLeveLConfirmation';
 import CongratulationsPage from './Components/FinalPage';
-import { useRef, useEffect, useState } from 'react';
-
 function App() {
 
 
