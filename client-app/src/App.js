@@ -39,7 +39,7 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path='/' element={<HomePage />} />
+          <Route path='/MathGame' element={<HomePage />} />
           <Route path="/Level/:level" element={<Level />} />
           <Route path="/next-level/:level" element={<NextLevelPage />} />
           <Route path="/final" element={<CongratulationsPage />} />
