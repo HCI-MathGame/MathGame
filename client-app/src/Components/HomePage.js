@@ -49,8 +49,28 @@ const HomePage = () => {
                             borderRadius: '10px',
                             boxShadow: '4px 4px 0px #D32F2F', // Shadow for the 3D effect
                             cursor: 'pointer',
-                        }}>Începeți jocul!</button>
+                        }}>Joacă toate nivelele!</button>
                 </Link>
+                {/* Additional level buttons */}
+                {[1, 2, 3, 4].map(level => (
+                    <Link key={level} to={`/Level/${level}`}>
+                        <button style={{
+                            backgroundColor: '#F44336', // Red color
+                            border: 'none',
+                            color: 'white',
+                            padding: '15px 32px',
+                            textAlign: 'center',
+                            textDecoration: 'none',
+                            display: 'inline-block',
+                            fontSize: '16px',
+                            borderRadius: '10px',
+                            boxShadow: '4px 4px 0px #D32F2F',
+                            cursor: 'pointer',
+                            marginTop: '15px'
+                        }}>{level === 1 ? "Adunare" : level === 2 ? "Scădere" : level === 3 ? "Înmulțire" : "Împărțire"}</button>
+                    </Link>
+                ))}
+
             </div>
         </>
     );
