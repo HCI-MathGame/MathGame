@@ -32,9 +32,6 @@ function App() {
       const audio = audioRef.current;
       audio.volume = 0.3;
       audio.play();
-      if (audio) {
-        audio.play().catch((e) => console.error("Error playing audio:", e));
-      }
     }
   }, [userInteracted]);
 
@@ -48,7 +45,7 @@ function App() {
           <Route path="/final" element={<CongratulationsPage />} />
         </Routes>
       </Router>
-      <audio ref={audioRef} src="/music.mp3" loop />
+      <audio ref={audioRef} src="%PUBLIC_URL%/music.mp3" loop />
     </div>
   );
 }
