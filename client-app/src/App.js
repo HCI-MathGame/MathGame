@@ -1,6 +1,6 @@
 // src/App.js
 import React from 'react';
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link, Routes } from 'react-router-dom';
 import HomePage from './Components/HomePage';
 import Level from './Components/Level';
 import NextLevelPage from './Components/NextLeveLConfirmation';
@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div>
-      <Router basename='/'>
+      <Router>
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path="/Level/:level" element={<Level />} />
